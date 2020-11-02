@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { WeatherList } from "./models/WeatherList";
 import { onSnapshot, getSnapshot } from "mobx-state-tree";
 
-//Sets default initial state
+//Sets default initial state for all cities in the menu
 let initialState = {
     items: [
         {
@@ -28,6 +28,7 @@ let initialState = {
     ]
 }
 
+// store the WeatherListItems that's selected (to be rendered)
 let initialRender = {
     items: []
 }
@@ -54,10 +55,10 @@ function renderApp() {
     ReactDOM.render(
         <App weatherList={ weatherList } renderList={ renderList } />,
         document.getElementById('root')
-    );
+    )
 }
 
-renderApp();
+renderApp()
 
 if (module.hot) {
     module.hot.accept(["./components/App"], () => {
@@ -69,7 +70,7 @@ if (module.hot) {
         // new model definitions
         const snapshot = getSnapshot(weatherList);
         weatherList = WeatherList.create(snapshot);
-        renderApp();
+        renderApp()
     })
 }
 

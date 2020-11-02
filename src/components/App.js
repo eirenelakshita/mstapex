@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Chart from "react-apexcharts";
 import './App.css';
 import Select from 'react-select';
-//import weatherlist model here
-//import { WeatherList } from "../models/WeatherList";
 
 class App extends Component {
     constructor(props) {
@@ -74,7 +72,7 @@ class App extends Component {
             data: this.state.weatherList.average
         }]
         this.setState({ renderList: newRender })
-//        console.log(this.state.weatherList.items)
+//        setInterval(() => console.log(this.state.menu.map(option => this.state.weatherList.update(option.value))),10000)
     }
 
     handleChange = selectedOption => {
@@ -94,7 +92,7 @@ class App extends Component {
 
     rankCities = () => {
         let sorted = this.state.weatherList.ranking
-        this.setState({ sorted }, ()=>console.log(this.state.sorted))
+        this.setState({ sorted })
     }
 
 
@@ -118,9 +116,9 @@ class App extends Component {
                   width="500"
           />
           <h4>City Average</h4>
-          { selectedOption && this.state.renderList.map(item=>(<h5>{item.name}: {item.average} C</h5>)) }
+          { selectedOption && this.state.renderList.map(item=>(<h5 key={item.name}>{item.name}: {item.average} C</h5>)) }
           <button onClick={this.rankCities}>Rank</button>
-          { this.state.sorted && this.state.sorted.map(city=><p>{city[0]}</p>)}
+          { this.state.sorted && this.state.sorted.map(city=><p key={city[0]}>{city[0]}</p>)}
         </div>
     );
   }

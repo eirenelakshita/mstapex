@@ -39,14 +39,17 @@ export const WeatherList = types
         remove(item) {
             destroy(item)
         },
-        update: flow (function*(option) {
+        async update(option) {
             let arr2 = []
-            const res = yield API.search(option)
-            yield res.data.list.map(d => arr2.push(d.main.temp))
+            const res = await API.search(option)
+            await res.data.list.map(d => arr2.push(d.main.temp))
+
+        },
+        updateTwo(option,arr2) {
             const target = self.items.find(o => o.name === option)
             target.changeData(arr2)
             console.log(JSON.stringify(self.items[0]))
-        }),
+        },
         selected(selectedOption) {
             let renderList = []
             selectedOption.map(option => renderList.push(WeatherListItem.create(getSnapshot(self).items.find(item => item.name === option.value))))
