@@ -43,7 +43,7 @@ export const WeatherList = types
             let arr2 = []
             const res = await API.search(option)
             await res.data.list.map(d => arr2.push(d.main.temp))
-
+            this.updateTwo(option,arr2)
         },
         updateTwo(option,arr2) {
             const target = self.items.find(o => o.name === option)
