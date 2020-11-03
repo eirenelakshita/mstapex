@@ -1,4 +1,3 @@
-import { getSnapshot, onSnapshot, onPatch } from "mobx-state-tree"
 import { WeatherListItem } from "./WeatherList"
 import { reaction } from "mobx"
 

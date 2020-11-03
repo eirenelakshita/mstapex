@@ -72,20 +72,22 @@ class App extends Component {
             data: this.state.weatherList.average
         }]
         this.setState({ renderList: newRender })
-//        setInterval(() => console.log(this.state.menu.map(option => this.state.weatherList.update(option.value))),10000)
+        setInterval(() => {
+                this.state.menu.map(option => this.state.weatherList.update(option.value))
+            }, 900000)
     }
 
     handleChange = selectedOption => {
       this.setState({ selectedOption },() => {
         if (!selectedOption) {
-            let newRender = [{
+            let cRender = [{
                 name: "average",
                 data: this.state.weatherList.average
             }]
-            this.setState({ renderList: newRender }, ()=> console.log(this.state.renderList))
+            this.setState({ renderList: cRender })
         } else {
-            let newRender = this.state.weatherList.selected(selectedOption)
-            this.setState({ renderList: newRender }, ()=> console.log(this.state.renderList))
+            let cRender = this.state.weatherList.selected(selectedOption)
+            this.setState({ renderList: cRender })
         }
       })
     }
@@ -116,7 +118,7 @@ class App extends Component {
                   width="500"
           />
           <h4>City Average</h4>
-          { selectedOption && this.state.renderList.map(item=>(<h5 key={item.name}>{item.name}: {item.average} C</h5>)) }
+          { selectedOption && this.state.renderList.map(item=>(<h5 key={item.name}>{item.name}: {Math.round((item.average + Number.EPSILON) * 100) / 100} C</h5>)) }
           <button onClick={this.rankCities}>Rank</button>
           { this.state.sorted && this.state.sorted.map(city=><p key={city[0]}>{city[0]}</p>)}
         </div>
